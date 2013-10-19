@@ -1,0 +1,61 @@
+* 搭建hibernate项目:	
+	*  创建java的应用工程
+	
+	*  引入jar包
+			   * hibernate的相关jar包
+			           hibernate-distribution-3.5.6-Final\lib\required\*.jar
+			           hibernate-distribution-3.5.6-Final\hibernate3.jar
+			          
+			           hibernate-annotations-3.4.0.GA\lib\test\slf4j-log4j12.jar
+			           hibernate-annotations-3.4.0.GA\lib\test\log4j.jar
+			
+			   * junit测试的jar包
+			             junit-4.8.2.jar
+			
+			   * mysql的驱动jar包
+			             mysql-connector-java-5.1.10-bin.jar
+			             
+	* 创建表
+	        CREATE TABLE customers
+			(
+			  id            INT PRIMARY KEY,
+			  NAME          VARCHAR(12),
+			  age           INT,
+			  des           TEXT
+			)
+			    		          
+	* 创建表对应的javaBean	
+			public class Customer {
+				//OID:Object id,表示hibernate中持久化类的唯一标识
+				private Integer id;
+				private String name;
+				private Integer age;
+				private String des;	    
+			}	
+			
+	*  创建表和javaBean之间额映射关系
+	    * 创建Customer.hbm.xml文件,该文件的规范放置到hibernate3.jar/org.hibernate.mapping-3.0.dtd
+	    * 配置见例子
+	    
+	    
+	* 创建hibernate.,cfg.xml文件,
+	       * 放置到src下, 该文件的规范放置到hibernate3.jar/org.hibernate.configuration-3.0.dtd  		
+		   * 配置见例子	
+		   
+	* 创建App类测试	   
+		   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+			             

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.component.Customer" table="customer02" >
+	      <id name="id" type="integer">
+	         <column name="id"></column>
+	         <generator class="increment"/>
+	      </id>
+	      <property name="name" column="name" type="string"></property>
+	      <!-- 
+	         component:表名Address属性是Customer的组成部分
+	           * name:待映射的持久化类的属性
+	           * class:待映射的持久化类的属性的类型
+	           * parent name="customer":指定address类所属的整体类是customerl类
+	       -->
+	      <component name="homeAddress" class="cn.itcast.component.Address">
+	          <parent name="customer"/>
+		      <property name="street" column="home_street" type="string"></property>
+		      <property name="city" column="home_city" type="string"></property>
+		      <property name="province" column="home_province" type="string"></property>
+		      <property name="zipcode" column="home_zipcode" type="string"></property>
+	      </component>
+	      
+	      <component name="comAddress" class="cn.itcast.component.Address">
+	          <parent name="customer"/>
+		      <property name="street" column="com_street" type="string"></property>
+		      <property name="city" column="com_city" type="string"></property>
+		      <property name="province" column="com_province" type="string"></property>
+		      <property name="zipcode" column="com_zipcode" type="string"></property>
+	      </component>
+	</class>
+</hibernate-mapping>

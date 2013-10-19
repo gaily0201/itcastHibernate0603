@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.formula.Customer" table="customers">
+		<id name="id" type="integer">
+			<column name="id"></column>
+			<generator class="increment" />
+		</id>
+		<property name="name" type="string">
+			<column name="name"></column>
+		</property>
+		<property name="age" type="integer">
+			<column name="age"></column>
+		</property>
+		<property name="des" type="text">
+			<column name="des"></column>
+		</property>
+		<property name="price" type="double">
+			<column name="price"></column>
+		</property>
+		
+		<!-- totalPrice属性在数据库中没有对应的字段,该值可以通过formula获取到 -->
+		<property name="totalPrice" type="double" formula="(select sum(c.price) from customers c)">
+		</property>
+		
+	</class>
+</hibernate-mapping>

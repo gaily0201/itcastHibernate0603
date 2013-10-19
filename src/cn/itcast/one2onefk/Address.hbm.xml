@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.one2onefk.Address" table="address">
+      <id name="id" type="integer">
+         <column name="id"></column>
+         <generator class="increment"/>
+      </id>
+      <property name="city" type="string">
+        <column name="city"></column>
+      </property>
+      
+      <property name="country" type="string">
+        <column name="country"></column>
+      </property>
+      
+      <!-- 
+          * one-to-one:用于映射一对一
+               该元素使用 property-ref(可以不加) 属性指定使用被关联实体主键以外的字段作为关联字段
+           * 如果获取company属性的值,通过address表的主键[company表的外键]获取的.    
+       -->
+      <one-to-one name="company" property-ref="address" >
+      </one-to-one>
+
+	</class>
+</hibernate-mapping>

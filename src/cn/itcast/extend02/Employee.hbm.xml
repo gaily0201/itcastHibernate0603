@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.extend02.Employee" table="e_emps" >
+      
+      <id name="id" type="integer">
+         <column name="id"></column>
+         <generator class="increment"/>
+      </id>
+      
+      <property name="name" type="string">
+        <column name="name"></column>
+      </property>
+     
+      <!--
+        joined-subclass:配置映射子类的表
+           * name:映射的子类的完整的类路径
+           * table:子类对应的表
+       -->
+      <joined-subclass name="cn.itcast.extend02.HourEmployee" table="h_emps">
+         <!-- 映射子类对应表的主键和外键,外键参照e_emps表的主键 -->
+         <key column="hid"></key>
+         <property name="rate"  column="rate" type="double"/>
+      </joined-subclass>
+      
+      <joined-subclass name="cn.itcast.extend02.SalaryEmployee" table="s_emps">
+         <!-- 映射子类对应表的主键和外键,外键参照e_emps表的主键 -->
+         <key column="sid"></key>
+         <property name="salary"  column="salary" type="double"/>
+      </joined-subclass>
+      
+	</class>
+</hibernate-mapping>

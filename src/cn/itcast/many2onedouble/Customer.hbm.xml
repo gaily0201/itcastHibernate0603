@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.many2onedouble.Customer" table="customers">
+      <id name="id" type="integer">
+         <column name="id"></column>
+         <generator class="increment"/>
+      </id>
+      <property name="name" type="string">
+        <column name="name"></column>
+      </property>
+            
+      <!-- 
+          set:用于配置集合 1对多
+            * name：待映射的持久化类中的属性
+            * table="orders":表示该集合中的信息来源于那个表,这里的集合存放的是订单,来源于orders表
+            * key:标签key中配置的都是表的外键,  
+                  * column name="customer_id":表示订单集合的数据是通过订单表外键获取的
+                        select id,orderNumber,price from orders where customer_id=客户id 
+            * one-to-many：映射一对多的关系
+                 * class="cn.itcast.many2onedouble.Order"
+                 * class:表示orders集合放置的是class属性指定的类型的对象  
+            * cascade="save-update":级联保存和更新
+                 * 当保存客户时,客户进入到session的一级缓存[持久对象],客户所关联的订单集合也进入session的一级缓存,转化为持久对象 
+                 
+            * inverse="true":表示对方是主控方,如果数据放生变化,主控方发生变化,不是主控方不发生变化.
+                       customer.hbm  :inverse="true
+                       order.hbm.xml  主控方             
+       -->
+      <set name="orders" table="orders" cascade="delete-orphan" inverse="true" >
+          <key>
+            <column name="customer_id"></column>
+         </key>
+         <one-to-many class="cn.itcast.many2onedouble.Order"/>
+      </set>
+	</class>
+</hibernate-mapping>

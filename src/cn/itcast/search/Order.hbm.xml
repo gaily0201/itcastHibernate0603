@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.search.Order" table="orders">
+      <id name="id" type="integer">
+         <column name="id"></column>
+         <generator class="increment"/>
+      </id>
+      <property name="orderNumber" type="string">
+        <column name="orderNumber"></column>
+      </property>
+      
+      <property name="price" type="double">
+        <column name="price"></column>
+      </property>
+      
+      <many-to-one name="customer" class="cn.itcast.search.Customer" > 
+         <column name="customer_id"></column>
+      </many-to-one>
+
+	</class>
+</hibernate-mapping>

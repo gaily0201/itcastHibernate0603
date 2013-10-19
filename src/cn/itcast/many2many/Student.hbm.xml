@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.many2many.Student" table="students">
+		<id name="id" type="integer">
+			<column name="id"></column>
+			<generator class="increment" />
+		</id>
+		<property name="name" type="string">
+			<column name="name"></column>
+		</property>
+	<!--
+		key:映射的student_course中间表的外键,
+		    courses集合时通过中间表的外键sid获取的.
+		     * select cid from student_course where sid=?
+		many-to-many:用于映射多对多的关系
+		     * class:表示courses中放置的对象的类型  
+		     * column="cid",通过cid到couse表中查询具体的Course对象
+	   
+	   inverse="true":course端是主控方	     
+	-->
+	<set name="courses" table="student_course" inverse="true" cascade="delete">
+		<key>
+			<column name="sid" />
+		</key>
+		<many-to-many class="cn.itcast.many2many.Course" column="cid">
+		</many-to-many>
+	</set>
+   </class>	
+</hibernate-mapping>

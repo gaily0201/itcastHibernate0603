@@ -1,0 +1,73 @@
+二级缓存:
+
+     * 引入jar包 
+         * ehcache-1.5.0.jar包
+         * backport-util-concurrent.jar
+         *  commons-logging.jar
+     
+     * 在hibernate.cfg.xml文件中配置二级缓存的相关配置
+           * 开启二级缓存
+              <property name="hibernate.cache.use_second_level_cache">true</property>  
+     
+           * 指定二级缓存提供的供应商
+                 <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property> 
+                 
+           
+           * *.hbm.xml文件要通过在hibernate,cfg.xml文件配置加载       
+                <mapping resource="cn/itcast/cache/Customer.hbm.xml"/>
+                 <mapping resource="cn/itcast/cache/Order.hbm.xml"/>
+    
+           * 设置二级缓存中可以放置的对象的类型
+              * 配置类级别
+                  <class-cache class="cn.itcast.cache.Customer" usage="read-write" />   
+                  <class-cache class="cn.itcast.cache.Order" usage="read-write" />
+              * 配置集合级别
+                   <collection-cache  collection="cn.itcast.cache.Customer.orders" usage="read-write"/>
+                   
+       * 赋值 ehcache-1.5.0.jar\ehcache-failsafe.xml放置到src下
+            * 修改名称为ehcache.xml     
+            * 去掉注释
+            * 配置如下:
+                     <?xml version="1.0" encoding="UTF-8"?>
+					<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../config/ehcache.xsd">
+					    <!-- 配置缓存中的对象存放到硬盘上的目录
+					          * java.io.tmpdir:存放到操作系统的临时目录
+					     -->
+					    <diskStore path="D:/temp"/>
+					    <!-- 
+					         二级缓存中对象和集合的配置方式
+					         对缓存中存放的所有的对象都有效.
+					    -->
+					    <defaultCache
+					            maxElementsInMemory="10"  //见ppt
+					            eternal="true"
+					            timeToIdleSeconds="120"
+					            timeToLiveSeconds="120"
+					            overflowToDisk="true"
+					            maxElementsOnDisk="100000"
+					            diskPersistent="true"
+					            diskExpiryThreadIntervalSeconds="120"
+					            />
+					        
+					     <!-- 配置二级缓存,针对二级缓存中某个对象的设置方式
+					            * name="cn.itcast.cache.Order"  :二级缓存中存放Order对象的配置方式
+					            * name="cn.itcast.Customer.orders":二级缓存中存放客户关联的订单集合的配置方式
+					            * 该配置方式,要覆盖默认的配置方式
+					      -->     
+					     <cache
+					            name="cn.itcast.cache.Order"
+					            maxElementsInMemory="10"
+					            eternal="true"
+					            overflowToDisk="true"
+					            maxElementsOnDisk="10000000"
+					            diskPersistent="true"
+					            diskExpiryThreadIntervalSeconds="120"
+					            />        
+					</ehcache>
+               
+       * 配置二级缓存中的查询缓存   
+           *  在 hibernate 配置文件中启用查询缓存
+               <property name="cache.use_query_cache">true</property>
+           * 对于希望启用查询缓存的查询语句, 调用 Query 的 setCacheable(true) 方法
+          
+             

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.one2onepk.Address" table="address">
+      <id name="id" type="integer">
+         <column name="id"/>
+         <!-- 
+             class="foreign":表示该表主键的值，是参照其他的表的主键   
+             param name="property"  property: 表示该值参数其他的属性值
+                  company:参数company表的主键
+          -->
+         <generator class="foreign">
+            <param name="property">company</param>
+          </generator>
+    
+      </id>
+      <property name="city" type="string">
+        <column name="city"></column>
+      </property>
+      
+      <property name="country" type="string">
+        <column name="country"></column>
+      </property>
+      
+      <!-- 
+        constrained="true":给address表的主键增加外键约束
+       -->
+      <one-to-one name="company" constrained="true"></one-to-one>
+
+	</class>
+</hibernate-mapping>

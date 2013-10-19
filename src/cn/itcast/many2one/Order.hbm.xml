@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.many2one.Order" table="orders">
+      <id name="id" type="integer">
+         <column name="id"></column>
+         <generator class="increment"/>
+      </id>
+      <property name="orderNumber" type="string">
+        <column name="orderNumber"></column>
+      </property>
+      
+      <property name="price" type="double">
+        <column name="price"></column>
+      </property>
+      
+      <!-- 
+         many-to-one:用于配置多对一的关系,这里是多个订单对应一个客户
+           * name:待映射的持久类中的属性
+           * class:name属性的类型
+           * column:表示 customer 属性对应表的外键,这里是customer_id.
+                     容易的理解:如果获取订单属于的客户,这里是通过订单表的外键customer_id,来查询客户的信息
+           * cascade="save-update":级联保存和级联更新
+              * 当保存订单是,此时订单对象进入session的一级缓存,  
+                    cascade="save-update"：这时也让与订单对象关联的customer对象也进入到session的一级缓存        
+       -->
+      <many-to-one name="customer" class="cn.itcast.many2one.Customer" cascade="save-update"> 
+         <column name="customer_id"></column>
+      </many-to-one>
+      
+      
+      
+	</class>
+</hibernate-mapping>

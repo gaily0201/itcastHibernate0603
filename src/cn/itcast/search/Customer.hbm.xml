@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.search.Customer" table="customers"  lazy="false" batch-size="2">
+      <id name="id" type="integer" unsaved-value="0">
+         <column name="id"></column>
+         <generator class="increment"/>
+      </id>
+      <property name="name" type="string">
+        <column name="name"></column>
+      </property>
+      
+      <property name="age" type="integer">
+        <column name="age"></column>
+      </property>
+      
+      <set name="orders" table="orders" inverse="true" batch-size="3">
+          <key>
+            <column name="customer_id"></column>
+         </key>
+         <one-to-many class="cn.itcast.search.Order"/>
+      </set>
+	</class>
+	
+	<query name="customerByNameAndAge">
+	  <![CDATA[from Customer c where c.name=? and c.age=?]]>
+	</query>
+	
+</hibernate-mapping>

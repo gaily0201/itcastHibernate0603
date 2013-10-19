@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.oid.native_.Customer" table="customers">
+		<id name="id" type="integer">
+			<column name="id"></column>
+			<!--设置主键生成策略 native表示主键生成策略 随着数据库的变化而变化 -->
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string">
+			<column name="name" sql-type="varchar(12)"></column>
+		</property>
+		<property name="age" type="integer">
+			<column name="age"></column>
+		</property>
+		<property name="des" type="text">
+			<column name="des" ></column>
+		</property>
+	</class>
+</hibernate-mapping>

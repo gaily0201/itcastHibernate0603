@@ -1,0 +1,71 @@
+hibernate总结
+    * 入门
+      * 配置映射文件 *.hbm.xml文件
+      * 配置hibernate.cfg.xml文件
+      * 对数据执行curd操作
+      
+    * hibernate的对象基础
+      * 什么事orm映射
+      * 字段访问---<property  name="name" columm="name" access="field/property"
+      * 在pojo对象的set方法加入业务逻辑
+      * formula的使用
+      * hibernate中的设置生成sql语句中，不包含的列[6]******
+      * 配置包
+    
+    * 主键生成策略
+      * 理解自然主键和代理主键
+      * 理解id
+      * 理解快照
+      * 理解缓存
+      * incremnt标示符生成器
+ 第二天:   
+      * identity
+      * native
+      * assigned
+      * 联合主键
+    * 多对一和一对多 ******
+      * 研究多对一的单项关联
+      * 研究一对多的双向项关联
+      
+    * 对象的状态
+      * 区分 flush commit clear  delete方法
+      * 会设置清理缓存的模式
+      * 临时对象  持久对象  游离对象
+      
+第三天:
+    * sesion的方法[save update saveOrUpdate delete get load]的详解
+    * 多对多映射 ******
+    * 组合映射
+    * hibernate的检索策略 
+       * 区分立即检索和延迟检索
+       * 区分类级别的检索和关联级别的检索
+       * many-to-one中fetch【join select】和lazy[false proxy]的组合
+       * set中fetch【join select subselect】和lazy[true  false extra]的组合
+       * many-to-one+set的组合
+       * 批量查询 batch-size
+       
+第四天:
+    * 继承映射
+    * 检索方式[hql和qbc] 15点
+    * 二缓缓存
+       * 什么事二级缓存
+       * 二级缓存的分类
+       * 二级缓存的供应商
+       * 会配置cache.xml文件
+       * 理解二级缓存的散列数据.
+       * 区分类级别  集合级别  查询缓存 更新时间戳缓存的区别       
+    
+    
+    
+    
+    
+    
+    
+      
+      
+       
+      
+       
+          
+      
+       

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.extend01.Employee" table="emps" discriminator-value="ee">
+      
+      <id name="id" type="integer">
+         <column name="id"></column>
+         <generator class="increment"/>
+      </id>
+      
+      <!-- 辨别者列,etype这个列用于区分员工 钟点工 正式员工,该配置必须放置到id标签的后面,其他标签的前面 -->
+      <discriminator column="etype" type="string"/>
+      
+      <property name="name" type="string">
+        <column name="name"></column>
+      </property>
+      <!-- 
+         subclass:用于映射子类
+                 * name:待映射的子类的完整类名
+                 * discriminator-value:变别者列的值
+       -->
+      <subclass name="cn.itcast.extend01.HourEmployee"  discriminator-value="he">
+         <property name="rate" column="rate" type="double"/>
+      </subclass>
+      
+      <subclass name="cn.itcast.extend01.SalaryEmployee"  discriminator-value="se">
+         <property name="salary" column="salary" type="double"/>
+      </subclass>
+      
+	</class>
+</hibernate-mapping>

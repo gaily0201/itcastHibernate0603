@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.one2onefk.Company" table="company">
+		<id name="id" type="integer">
+			<column name="id"></column>
+			<generator class="increment" />
+		</id>
+		<property name="name" type="string">
+			<column name="name"></column>
+		</property>
+
+        <!-- 
+           many-to-one:映射多对一关联
+              * address:带映射的持久化类的属性
+              * column:对应的表的字段,address属性的值使用company表的外键到address表中查的
+              * unique="true":唯一的,company表的外键列的值是唯一的,把多对一改为一对一
+         -->
+		<many-to-one name="address" column="addressId" unique="true"
+			not-null="true" />
+	</class>
+</hibernate-mapping>

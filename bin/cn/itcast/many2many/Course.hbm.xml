@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.itcast.many2many.Course" table="courses">
+		<id name="id" type="integer">
+			<column name="id"></column>
+			<generator class="increment" />
+		</id>
+		<property name="name" type="string">
+			<column name="name"></column>
+		</property>
+
+		<set name="students" table="student_course">
+			<key>
+				<column name="cid" />
+			</key>
+			<many-to-many class="cn.itcast.many2many.Student"
+				column="sid">
+			</many-to-many>
+		</set>
+
+	</class>
+</hibernate-mapping>

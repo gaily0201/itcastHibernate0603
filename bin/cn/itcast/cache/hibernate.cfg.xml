@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">	
+<hibernate-configuration>
+   <session-factory>
+     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/test</property>
+     <property name="hibernate.connection.username">root</property>
+     <property name="hibernate.connection.password">root</property>
+     <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+     <property name="hibernate.show_sql">true</property>
+     <property name="hibernate.format_sql">false</property>
+     <property name="hibernate.hbm2ddl.auto">update</property>
+     
+     <!--配置数据库的隔离级别
+        1—Read uncommitted isolation
+		2—Read committed isolation
+		4—Repeatable read isolation
+		8—Serializable isolation
+     -->
+     <property name="hibernate.connection.isolation">4</property>
+     
+     <!-- 配置session的线程本地化 -->
+     <property name="current_session_context_class">thread</property>
+     
+     <!-- 开启二级缓存 -->
+     <property name="hibernate.cache.use_second_level_cache">true</property>  
+     
+     <!--指定二级缓存提供的供应商 -->
+     <property name="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</property>  
+     
+     <!-- 启动二级缓存中的查询缓存 -->
+     <property name="cache.use_query_cache">true</property>
+     
+     <mapping resource="cn/itcast/cache/Customer.hbm.xml"/>
+     <mapping resource="cn/itcast/cache/Order.hbm.xml"/>
+    
+       
+     <!-- 配置类级别的二级缓存,配置二级缓存中能放置的对象的类型 -->
+      <!--<class-cache class="cn.itcast.cache.Customer" usage="read-write" />-->
+      <class-cache class="cn.itcast.cache.Order" usage="read-write" />
+      
+     <!-- 配置集合级别的二级缓存 -->
+     <collection-cache  collection="cn.itcast.cache.Customer.orders" usage="read-write"/>
+     
+   </session-factory>
+</hibernate-configuration>
+

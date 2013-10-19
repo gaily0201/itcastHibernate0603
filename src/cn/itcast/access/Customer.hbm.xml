@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="cn.itcast.access.Customer" table="customers">
+    <id name="id" type="integer">
+       <column name="id"></column>
+       <generator class="increment"/>
+    </id> 
+    <!-- 
+       access:表示访问策略 默认值是property
+          * property:表明hibernate通过getXXX和setXXX来访问类属性
+          * field:hibernate通过java反射机制直接访问类属性。对于没有javabean方法的属性可设置该访问策略。
+          
+     -->
+    <property name="name" type="string"  access="field">
+      <column name="name"></column>
+    </property>  
+    <property name="age" type="integer">
+      <column name="age"></column>
+    </property>  
+    
+     <property name="des" type="text">
+      <column name="des"></column>
+    </property>  
+  </class>
+</hibernate-mapping>    
